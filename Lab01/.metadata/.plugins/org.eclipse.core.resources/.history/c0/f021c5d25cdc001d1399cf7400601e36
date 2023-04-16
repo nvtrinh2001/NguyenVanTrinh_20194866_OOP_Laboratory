@@ -1,0 +1,19 @@
+package seconddegreeequation;
+
+public class SecondDegreeEquation {
+	
+	double discriminant(double a, double b, double c) {
+		return b*b-4*a*c;
+	}
+
+	public double calculateRoot(double a, double b, double c) {
+
+		if (a == 0) {
+			throw new ArithmeticException("a cannot be 0");
+		}
+		
+		
+		
+	}
+	
+}
