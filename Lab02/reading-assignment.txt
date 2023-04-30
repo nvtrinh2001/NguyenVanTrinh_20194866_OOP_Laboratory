@@ -1,0 +1,10 @@
+Here are some situations where you might want to use accessors:
+
+    Encapsulation: Accessors can be used to encapsulate the internal state of an object. By only exposing accessors to external code, it gives more control over how the value is accessed and modified. This can help with maintaining the integrity of the object's state and prevent external code from causing unintended side effects.
+
+    Validation: Accessors can be used to validate the input before setting the value of a variable. For example, if you have a variable that represents a person's age, you might want to ensure that the age is a positive integer before allowing it to be set.
+
+    Computed properties: Accessors can be used to provide computed properties that are derived from other variables or data. For example, if you have a class that represents a rectangle, you might want to provide accessors for the area and perimeter of the rectangle, which are computed based on the width and height.
+
+    Compatibility with future changes: Accessors can be used to provide a level of abstraction between the external code and the internal implementation of a class. This can make it easier to change the internal implementation in the future without affecting the external code that uses the class.
+
