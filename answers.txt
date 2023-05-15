@@ -1,0 +1,16 @@
+[LAB 03]
+
+Q: addDigitalVideoDisc(DigitalVideoDisc [] dvdList) and addDigitalVideoDisc(DigitalVideoDisc... dvdList)? 
+A: They are both added to the list of digital video discs using an array, but the second one is more readable, so I prefer using it over the first one.
+
+O: Is JAVA a Pass by Value or a Pass by Reference programming language?
+A: In Java, arguments are passed by value. This means that when you pass a variable as an argument to a method, a copy of the value is made and passed to the method. Any changes made to the parameter within the method do not affect the original variable outside of the method.
+
+Q: After the call of swap(jungleDVD, cinderellaDVD), why does the title of these two objects still remain?
+A: Because both values are copied and pass to the swap method as arguments, therefore the original values are not changed, and the title of the two objects remains the same.
+
+Q: After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()), why is the title of the JungleDVD changed?
+A: Because in the changeTitle method, we changed the actual value of the jungleDVD object by calling the setTitle method. Therefore the title of the JungleDVD object is changed.
+
+Q: Write a toString() method for the DigitalVideoDiscclass. What should be the return type of this method?
+A: The return type of this mothod is void as the toString method does not return anything. It only prints out the string value of the DVD object.
