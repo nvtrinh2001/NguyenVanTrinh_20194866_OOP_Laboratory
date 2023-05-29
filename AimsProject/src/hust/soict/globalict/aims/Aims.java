@@ -136,22 +136,21 @@ public class Aims {
 			break;
 
 		case 2:
-			System.out.println("Choose an option:\n1. Add media\t2. Remove media");
-			choice = scan.nextInt();
-
 			Media media = createMedia();
 			if (media == null) {
-				System.out.println("Can't create Media");
+				System.out.println("Error creating Media");
 				showMenu();
 				return;
 			}
 
+			System.out.println("Choose an option:\n1. Add media\t2. Remove media");
+			choice = scan.nextInt();
 			if (choice == 1)
 				store.addMedia(media);
 			else if (choice == 2)
 				store.removeMedia(media);
 			else
-				System.out.println("Wrong format");
+				System.out.println("Choose only 1 or 2.");
 
 			showMenu();
 			break;
@@ -166,7 +165,7 @@ public class Aims {
 			break;
 
 		default:
-			System.out.println("Wrong format");
+			System.out.println("Choose only 0, 1, 2 or 3.");
 			showMenu();
 			break;
 		}
@@ -186,13 +185,11 @@ public class Aims {
 		scan.nextLine();
 		switch (choice) {
 		case 1:
-			// Enter title of media and display information
-			System.out.print("Enter title: ");
+			System.out.print("Title: ");
 			inputString = scan.nextLine();
 			item = store.search(inputString);
 			if (item == null) {
-				System.out.println("Item doesn't exist");
-				store.print();
+				System.out.println("Item doesn't exist!");
 				storeMenu();
 				return;
 			}
@@ -201,56 +198,47 @@ public class Aims {
 			mediaDetailsMenu();
 			break;
 		case 2:
-			// Add to cart, check validity
-			System.out.print("Enter title: ");
+			System.out.print("Title: ");
 			inputString = scan.nextLine();
 			item = store.search(inputString);
 			if (item == null) {
-				System.out.println("Item doesn't exist");
-				store.print();
+				System.out.println("Item doesn't exist!");
 				storeMenu();
 				return;
 			}
 			cart.addMedia(item);
 
-			// Display number of items in cart
-			System.out.println("There're " + cart.getSize() + " items in current cart");
+			System.out.println("There're " + cart.getSize() + " items in your cart.");
 
-			store.print();
 			storeMenu();
 			break;
 		case 3:
-			System.out.print("Enter title: ");
+			System.out.print("Title: ");
 			inputString = scan.nextLine();
 			item = store.search(inputString);
 			if (item == null) {
-				System.out.println("Item doesn't exist");
-				store.print();
+				System.out.println("Item doesn't exist!");
 				storeMenu();
 				return;
 			}
 			if (item.getClass().getSimpleName().equals("Book")) {
-				System.out.println("Can't play this");
-				store.print();
+				System.out.println("This feature does not apply for book!");
 				storeMenu();
 				return;
 			}
 			if (item.getClass().getSimpleName().equals("CompactDisc")) {
 				CompactDisc cd = (CompactDisc) item;
 				cd.play();
-				store.print();
 				storeMenu();
 				return;
 			}
 			if (item.getClass().getSimpleName().equals("DigitalVideoDisc")) {
 				DigitalVideoDisc dvd = (DigitalVideoDisc) item;
 				dvd.play();
-				store.print();
 				storeMenu();
 				return;
 			}
 		case 4:
-			// Display information of current cart
 			cart.print();
 
 			cartMenu();
@@ -259,7 +247,7 @@ public class Aims {
 			showMenu();
 			break;
 		default:
-			System.out.println("Wrong format");
+			System.out.println("Choose only 0, 1, 2, 3, or 4.");
 			storeMenu();
 			return;
 		}
@@ -278,12 +266,11 @@ public class Aims {
 		switch (choice) {
 		case 1:
 			cart.addMedia(item);
-			store.print();
 			storeMenu();
 			return;
 		case 2:
 			if (item.getClass().getSimpleName().equals("Book")) {
-				System.out.println("Can't play this");
+				System.out.println("This feature does not apply to book!");
 				System.out.println(item.toString());
 				mediaDetailsMenu();
 				return;
@@ -306,7 +293,7 @@ public class Aims {
 			storeMenu();
 			return;
 		default:
-			System.out.println("Wrong format");
+			System.out.println("Choose only 0, 1, or 2!");
 			System.out.println(item.toString());
 			mediaDetailsMenu();
 			return;
@@ -328,33 +315,38 @@ public class Aims {
 		scan.nextLine();
 		switch (choice) {
 		case 1:
-			// Choose filter by id or title
-			System.out.println("U can choose filter by:\n1. id\t2. title");
+			System.out.println("Filter by:\n1. id\t2. title");
 			choice = scan.nextInt();
 			scan.nextLine();
 			if (choice == 1) {
-				System.out.print("Input id: ");
+				System.out.print("Id: ");
 				inputInt = scan.nextInt();
-				cart.search(inputInt);
-				cart.print();
+				Media media = cart.search(inputInt);
+				if (media == null) {
+					System.out.println("Not found item.");
+					return;
+				}
+				System.out.println(media.toString());
 				cartMenu();
 				return;
 			} else if (choice == 2) {
-				System.out.print("Input title: ");
+				System.out.print("Title: ");
 				inputString = scan.nextLine();
-				cart.search(inputString);
-				cart.print();
+				Media media = cart.search(inputString);
+				if (media == null) {
+					System.out.println("Not found item.");
+					return;
+				}
+				System.out.println(media.toString());
 				cartMenu();
 				return;
 			} else {
-				System.out.println("Wrong format.");
-				cart.print();
+				System.out.println("Choose only 1 or 2.");
 				cartMenu();
 				return;
 			}
 		case 2:
-			// Sort by title or cost
-			System.out.println("U can choose sort by:\n1. title\t2. cost");
+			System.out.println("Sort by:\n1. title\t2. cost");
 			choice = scan.nextInt();
 			if (choice == 1) {
 				Collections.sort(cart.getItemsOrdered(), Media.COMPARE_BY_TITLE_COST);
@@ -367,67 +359,56 @@ public class Aims {
 				cartMenu();
 				return;
 			} else {
-				System.out.println("Wrong format.");
-				cart.print();
+				System.out.println("Choose only 1 or 2.");
 				cartMenu();
 				return;
 			}
 		case 3:
-			// Remove by title
-			System.out.print("Input title of media to remove: ");
+			System.out.print("Title to remove: ");
 			inputString = scan.nextLine();
 			Media removeItem = cart.search(inputString);
 			cart.removeMedia(removeItem);
-			cart.print();
 			cartMenu();
 			return;
 		case 4:
-			System.out.print("Input title of media to play: ");
+			System.out.print("Title to play: ");
 			inputString = scan.nextLine();
 			item = cart.search(inputString);
 			if (item == null) {
-				System.out.println("Can't find item");
-				cart.print();
+				System.out.println("Item not found!");
 				cartMenu();
 				return;
 			}
 			if (item.getClass().getSimpleName().equals("Book")) {
-				System.out.println("Can't play this");
-				cart.print();
+				System.out.println("This feature does not apply to book!");
 				cartMenu();
 				return;
 			}
 			if (item.getClass().getSimpleName().equals("CompactDisc")) {
 				CompactDisc cd = (CompactDisc) item;
 				cd.play();
-				cart.print();
 				cartMenu();
 				return;
 			}
 			if (item.getClass().getSimpleName().equals("DigitalVideoDisc")) {
 				DigitalVideoDisc dvd = (DigitalVideoDisc) item;
 				dvd.play();
-				cart.print();
 				cartMenu();
 				return;
 			}
-			System.out.println("Can't find item");
-			cart.print();
+			System.out.println("Item not found!");
 			cartMenu();
 			return;
 		case 5:
-			// Notify user, empty current cart
-			System.out.println("An order is created");
+			System.out.println("Order created!");
 			cart.deleteAll();
-			cart.print();
 			showMenu();
 			return;
 		case 0:
 			showMenu();
 			return;
 		default:
-			System.out.println("Wrong format");
-			cart.print();
+			System.out.println("Choose only from 0 to 5.");
 			cartMenu();
 			return;
 		}

@@ -14,3 +14,20 @@ A: Because in the changeTitle method, we changed the actual value of the jungleD
 
 Q: Write a toString() method for the DigitalVideoDiscclass. What should be the return type of this method?
 A: The return type of this mothod is void as the toString method does not return anything. It only prints out the string value of the DVD object.
+
+[LAB 04]
+
+Q: Alternatively, to compare items in the cart, instead of using Comparator, we can use the Comparable interface and override the compareTo()method. You can refer to the Java docs to see the information of this interface.  
+   Suppose we are taking this Comparable interface approach. 
+   What class should implement the Comparable interface? 
+   In those classes, how should you implement the compareTo()method be to reflect the ordering that we want? 
+   Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach? 
+
+A: If we are using the Comparable interface approach to compare items in the cart, the Media class should implement the Comparable interface.
+
+   To implement the compareTo() method, you would need to define the logic for comparing two medias. For example, if we want to compare the cost first then the title, the method should return a negative integer if the cost of the current media is less than the other's one, or a positive integer if the current media's cost is greater than the other's one. If they are equal, we compare the title of them. The logic for the title is similar.
+
+   It is not directly possible with the Comparable interface. The Comparable interface allows for only one natural ordering. If you need multiple ordering rules, you would need to use a Comparator instead.
+
+   
+
