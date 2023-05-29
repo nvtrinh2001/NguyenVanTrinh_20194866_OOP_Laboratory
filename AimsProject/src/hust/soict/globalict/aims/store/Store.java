@@ -1,52 +1,72 @@
 package hust.soict.globalict.aims.store;
 
-import hust.soict.globalict.aims.disc.DigitalVideoDisc;
+import hust.soict.globalict.aims.media.Media;
+import java.util.*;
 
 public class Store {
-	
+
 	public static final int MAX_NUMBERS_ORDERED = 100;
-	
-	public int numberInStore = 0;
-	private DigitalVideoDisc itemsInStore[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
+
+	private List<Media> itemsInStore = new ArrayList<Media>();
 	
 	public int getNumberInStore() {
-		
-		return this.numberInStore;
-		
+		return itemsInStore.size();
 	}
-	
-	public void addDVD(DigitalVideoDisc dvd) {
-		
-		if (numberInStore == MAX_NUMBERS_ORDERED) {
+
+	public void addMedia(Media media) {
+
+		if (itemsInStore.size() == MAX_NUMBERS_ORDERED) {
 			System.out.println("The store is full");
 			return;
 		}
-		
-		itemsInStore[numberInStore] = dvd;
-		numberInStore++;
-		System.out.println("New DVD added to store");
-		
+
+		itemsInStore.add(media);
+		System.out.println("New Media added to store");
+
 	}
-	
-	public void removeDVD(DigitalVideoDisc disc) {
-		
-		if (numberInStore == 0) {
+
+	public void removeMedia(Media media) {
+
+		if (itemsInStore.size() == 0) {
 			System.out.println("Store is empty");
 			return;
 		}
-		
-		for (int i = 0; i < numberInStore; i++) {
-			if (itemsInStore[i].equals(disc)) {
-				for (int j = i; j < numberInStore - 1; j++) {
-					itemsInStore[j] = itemsInStore[j + 1];
-				}
-				numberInStore--;
-				itemsInStore[numberInStore] = null;
-				System.out.println("The disc has been removed from Store.");
-				return;
-			}
-		}
-		
+
+		itemsInStore.remove(media);
+		System.out.println("The media has been removed from Store.");
+
 	}
 	
+	public void print() {
+		System.out.println("=============STORE=============");
+		if (getNumberInStore() == 0) {
+			System.out.println("Store is empty!");
+		}
+		for(Media item: itemsInStore) System.out.println(item.toString());
+		System.out.println("===============================");
+	}
+	
+	public Media search(int id) {
+		
+		if (id < 0 || id > getNumberInStore()) {
+			System.out.println("ID not found.");
+			return null;
+		}
+
+		return itemsInStore.get(id);
+
+	}
+
+	public Media search(String title) {
+
+		for (Media media : itemsInStore) {
+			if (media.getTitle().equals(title))
+				return media;
+		}
+		
+		System.out.println("Title not found.");
+		return null;
+
+	}
+
 }
