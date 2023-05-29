@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Store {
 
-	public static final int MAX_NUMBERS_ORDERED = 100;
+	public static final int MAX_NUMBERS_STORE = 100;
 
 	private List<Media> itemsInStore = new ArrayList<Media>();
 	
@@ -15,7 +15,7 @@ public class Store {
 
 	public void addMedia(Media media) {
 
-		if (itemsInStore.size() == MAX_NUMBERS_ORDERED) {
+		if (itemsInStore.size() == MAX_NUMBERS_STORE) {
 			System.out.println("The store is full");
 			return;
 		}

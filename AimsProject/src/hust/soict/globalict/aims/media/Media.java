@@ -24,7 +24,7 @@ public abstract class Media {
 	
 	@Override
 	public String toString() {
-		String result = id + ". " + title + "   " + category + "   " + cost;
+		String result = title + "   " + category + "   " + cost;
 		return result;
 	}
 	
