@@ -1,38 +1,33 @@
 package hust.soict.globalict.aims.media;
 
-public abstract class Media {
+import java.util.Comparator;
 
-    private int id;
-    private String title;
-    private String category;
-    private float cost; 
-    
-    public Media(int id) {
+public abstract class Media {
+	
+	public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
+	public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
+	
+	private int id;
+	private String title;
+	private String category;
+	private float cost; 
+
+	public Media() {
 		super();
-		this.id = id;
 	}
 	
-    public Media(int id, String title) {
-		super();
-		this.id = id;
-		this.title = title;
+	@Override
+	public boolean equals(Object obj) {
+		Media media = (Media) obj;
+		return (this.title.equals(media.getTitle()));
 	}
-    
-    public Media(int id, String title, String category) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.category = category;
+	
+	@Override
+	public String toString() {
+		String result = id + ". " + title + "   " + category + "   " + cost;
+		return result;
 	}
-
-	public Media(int id, String title, String category, float cost) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.category = category;
-		this.cost = cost;
-	}
-
+	
 	public int getId() {
 		return id;
 	}

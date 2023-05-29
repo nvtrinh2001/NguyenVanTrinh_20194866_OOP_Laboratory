@@ -2,42 +2,23 @@ package hust.soict.globalict.aims.media;
 
 import java.util.*;
 
-public class CompactDisc extends Disc {
-	
+public class CompactDisc extends Disc implements Playable {
+
 	private String artist;
 	private List<Track> tracks = new ArrayList<Track>();
-	
-	public CompactDisc(int id) {
-        super(id);
+
+	public CompactDisc() {
+		super();
 	}
 	
-	public CompactDisc(int id, String title) {
-        super(id, title);
-	}
-	
-	public CompactDisc(int id, String title, String category) {
-        super(id, title, category);
-	}
-	
-	public CompactDisc(int id, String title, String category, float cost) {
-        super(id, title, category, cost);
-	}
-	
-	public CompactDisc(int id, String title, String category, float cost, String director) {
-        super(id, title, category, cost, director);
+	public void play() {
+		System.out.println("Artist: " + getArtist());
+		System.out.println("Number of tracks: " + tracks.size());
+		for (Track track : tracks) {
+			track.play();
+		}
 	}
 
-	public CompactDisc(int id, String title, String category, float cost, int length, String director) {
-        super(id, title, category, cost, length, director);
-	}
-	
-	public CompactDisc(int id, String title, String category, float cost, String director, String artist,
-			List<Track> tracks) {
-		super(id, title, category, cost, director);
-		this.artist = artist;
-		this.tracks = tracks;
-	}
-	
 	public void addTrack(Track track) {
 		for (int i = 0; i < tracks.size(); i++) {
 			if (tracks.get(i).getTitle().equals(track.getTitle())) {
@@ -45,12 +26,12 @@ public class CompactDisc extends Disc {
 				return;
 			}
 		}
-		
+
 		tracks.add(track);
 		System.out.println("Track added successfully!");
 		return;
 	}
-	
+
 	public void removeTrack(Track track) {
 		for (int i = 0; i < tracks.size(); i++) {
 			if (!tracks.get(i).getTitle().equals(track.getTitle())) {
@@ -58,10 +39,18 @@ public class CompactDisc extends Disc {
 				return;
 			}
 		}
-		
+
 		tracks.remove(track);
 		System.out.println("Track removed successfully!");
 		return;
+	}
+
+	public int getLength() {
+		int totalLength = 0;
+		for (Track track : tracks) {
+			totalLength += track.getLength();
+		}
+		return totalLength;
 	}
 
 	public String getArtist() {
